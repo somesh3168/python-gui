@@ -15,9 +15,15 @@ def OpenFile():
 	my_label = Label(root, text= root.opens).pack()
 	
 def SaveFile():
-	root.saves = filedialog.asksaveasfilename(initialdir = "c:/somesh/", title = "Select file", filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
+	#root.saves = filedialog.asksaveasfilename(initialdir = "c:/somesh/", title = "Select file", filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
+	saves = filedialog.asksaveasfile(mode ='w', initialdir = "c:/somesh/",  title = "Select file", filetypes = (("text files","*.txt"),("all files","*.*")))
+	if saves is None:
+		return
+	text2save = str(text.get(1.0, END))
+	saves.write(text2save)
+	saves.close()	
 def About():
-	root.msg = messagebox.showinfo("About","This is a simple Image Viewer. \nYou can open images and, \nsave them to another location")
+	root.msg = messagebox.showinfo("About","This is a simple Text Editor. \nYou can open txt files and, \nsave them to another location")
 
 
 root = Tk() 
@@ -25,7 +31,8 @@ root.title ("Python GUI - Demo")
 root.iconbitmap('folder.ico')
 menu = Menu(root) 
 root.config(menu=menu) 
-
+text = Text(root)
+text.pack()
 file_menu = Menu(menu) 
 menu.add_cascade(label='File', menu=file_menu) 
 

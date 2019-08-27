@@ -3,23 +3,31 @@ from tkinter import filedialog
 from tkinter import messagebox
 import os
 
-def __init__(root, master = None):
-	root.text = Text(top, height = 200, width = 200)
-	root.text.pack()
+# def __init__(root, master = None):
+# 	root.text = Text(top, height = 200, width = 200)
+# 	root.text.pack()
 
 def OpenFile():
-	root.opens = filedialog.askopenfilename(initialdir = "c:/somesh/", title = "Select file", filetypes = (("text files","*.txt"),("all files","*.*")))
-	with open(root.opens) as file:
-		for i in file:
-			root.text.insert(END,i)
-	my_label = Label(root, text= root.opens).pack()
+	x = filedialog.askopenfilename(initialdir = "c:/somesh/", filetypes = (("text files","*.txt"),("all files","*.*")))
+	global T
+	T = Text(root)
+	T.pack()
+	T.insert(END,open(x).read())
+	
+	# root.opens = filedialog.askopenfile(mode ='r',initialdir = "c:/somesh/", title = "Select file", filetypes = (("text files","*.txt"),("all files","*.*")))
+	# with open(root.opens) as file:
+	# 	for i in file:
+	# 		root.text.insert(END,i)
+	#my_label = Label(root, text= root.opens).pack()
 	
 def SaveFile():
 	#root.saves = filedialog.asksaveasfilename(initialdir = "c:/somesh/", title = "Select file", filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
 	saves = filedialog.asksaveasfile(mode ='w', initialdir = "c:/somesh/",  title = "Select file", filetypes = (("text files","*.txt"),("all files","*.*")))
+	#text = Text(root)
+	#text.pack()
 	if saves is None:
 		return
-	text2save = str(text.get(1.0, END))
+	text2save = str(T.get(1.0, END))
 	saves.write(text2save)
 	saves.close()	
 def About():
@@ -31,8 +39,8 @@ root.title ("Python GUI - Demo")
 root.iconbitmap('folder.ico')
 menu = Menu(root) 
 root.config(menu=menu) 
-text = Text(root)
-text.pack()
+#text = Text(root)
+#text.pack()
 file_menu = Menu(menu) 
 menu.add_cascade(label='File', menu=file_menu) 
 
@@ -48,16 +56,3 @@ helpmenu.add_command(label='About' , command = About)
 
 mainloop() 
 
-# from tkinter import *
-# from tkinter import filedialog
-
-# root = Tk()
-# root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
-# print (root.filename)
-
-# from tkinter import filedialog
-# from tkinter import *
-
-# root = Tk()
-# root.filename =  filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
-#print (root.filename)

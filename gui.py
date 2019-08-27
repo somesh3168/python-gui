@@ -4,17 +4,17 @@ from tkinter import messagebox
 import os
 
 def OpenFile():
-	x = filedialog.askopenfilename(initialdir = "c:/", filetypes = (("text files","*.txt"),("all files","*.*")))
-	global T
-	T = Text(root)
-	T.pack()
-	T.insert(END,open(x).read())
+	open_file = filedialog.askopenfilename(initialdir = "c:/", filetypes = (("text files","*.txt"),("all files","*.*")))
+	global Txt
+	Txt = Text(root)
+	Txt.pack()
+	Txt.insert(END,open(open_file).read())
 	
 def SaveFile():
 	saves = filedialog.asksaveasfile(mode ='w', initialdir = "c:/",  title = "Select file", filetypes = (("text files","*.txt"),("all files","*.*")))
 	if saves is None:
 		return
-	text2save = str(T.get(1.0, END))
+	text2save = str(Txt.get(1.0, END))
 	saves.write(text2save)
 	saves.close()	
 def About():
@@ -25,7 +25,7 @@ root = Tk()
 root.title ("TextPad - Demo")
 root.iconbitmap('Python.ico')
 root.geometry('350x250')
-msg = Label(root, text="\nOpen,Edit, and Save Your text files\n \n\n Simple is better than Complex.",background='teal')
+msg = Label(root, text="\nEdit & Save Your text files\n\n Simple is Better Than Complex.",background='teal')
 msg.pack()
 root.configure(background='teal')
 menu = Menu(root) 

@@ -4,14 +4,14 @@ from tkinter import messagebox
 import os
 
 def OpenFile():
-	x = filedialog.askopenfilename(initialdir = "c:/somesh/", filetypes = (("text files","*.txt"),("all files","*.*")))
+	x = filedialog.askopenfilename(initialdir = "c:/", filetypes = (("text files","*.txt"),("all files","*.*")))
 	global T
 	T = Text(root)
 	T.pack()
 	T.insert(END,open(x).read())
 	
 def SaveFile():
-	saves = filedialog.asksaveasfile(mode ='w', initialdir = "c:/somesh/",  title = "Select file", filetypes = (("text files","*.txt"),("all files","*.*")))
+	saves = filedialog.asksaveasfile(mode ='w', initialdir = "c:/",  title = "Select file", filetypes = (("text files","*.txt"),("all files","*.*")))
 	if saves is None:
 		return
 	text2save = str(T.get(1.0, END))
